@@ -5,12 +5,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-urlpatterns = [
-    path('',views.home),
-    
-    path('', home,name='home'),
-    path('add/',addBlog,name='addblog'),
+urlpatterns = [    
+    path('', IndexView.as_view(),name='index'),
+    path('add-blog/',AddBlogView.as_view(),name='add-blog'),
+    path('blog-detail/',BlogDetailView.as_view(),name='blog-detail'),
     # path('like/<str:pk>',likeBlog,name='like'),
+    
 ]
 
 

@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %}
 <html>
     <head>
         <title>
@@ -21,7 +21,11 @@
                         <div class="card-body">
                         <h5 class="card-title">{{b.title}}</h5>
                         <p class="card-text">{{b.description}}</p>
+<<<<<<< HEAD
                         {% comment %} <form action='{%  url 'like' b.id %}' method=POST>
+=======
+                        <form action="{%  url 'like' b.id %}" method=POST>
+>>>>>>> e7e4e609a034c4d7072a1e39aa54a1f6eb7bbda0
                             {% csrf_token %}
                             <button type='submit' class='btn btn-success'>{{b.likes}} Like</button>
                         </form> {% endcomment %}
@@ -37,4 +41,4 @@
     </body>
     <script>
 
-    </script>
+    </script> -->
