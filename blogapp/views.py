@@ -1,4 +1,4 @@
-from re import L
+from django.contrib.auth import logout
 from django.shortcuts import render,redirect
 from django.views.generic import View
 from .models import *
@@ -22,21 +22,22 @@ class AddBlogView(View):
     def get(self, request):
         form = blogForm()
         return render(request, 'add-blog.html', {'form': form})
-# def AddBlog(request):
-#     form=blogForm()
-#     if request.method=='POST':
-#         print(request.POST, "======================", request.user)
-#         post_values = request.POST.copy()
-#         post_values['user.id']=request.user.id
-#         print(post_values, "000000000000000000000000000000000000000000000000")
 
-#         form=blogForm(request.POST,request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/')
-#     context={
-#         'form':form,
-#     }
-#     return render(request,'addblog.html',context)
+    def post(self,form):
+        print(form, 'form')
+        print(self.request.user,'1111111111111111111111111111111111111111111')
+        if self.request.user.is_authenticated:
+            print(self.request)
+            print(self.request.user)
+            form.instance.user=self.request.user
+            form.save()
+            return render(self.request,'index.html',{'form':form})
+        else:
+            print('not authenticated==================wqsax')
+            return render(self.request,'login.html')
 
+# logout 
+def LogoutView(request):
+    logout(request)
+    return redirect('/')
 

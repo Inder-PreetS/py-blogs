@@ -556,10 +556,45 @@ h6 a,
   box-shadow: none;
 }
 
+.add_blog_dv button {
+  padding: 30px;
+}
+
+
+.add_blog_dv form .form-control {
+  width: 100%;
+  padding: 5px;
+  margin: 0 0 10px;
+}
+
+input.btn.btn-primary.submit_dv {
+  float: right;
+}
+
+.submit_dv:hover {
+  transform: none;
+}
+
+input[type=submit]:hover{
+  transform: none !important;
+}
 
 .dropdown-menu.show {
   width: 180px;
 }
+
+.django-ckeditor-widget {
+  width: 100%;
+}
+
+div#cke_id_content {
+  width: 100% !important;
+}
+
+label {
+  font-weight: 500;
+}
+
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
