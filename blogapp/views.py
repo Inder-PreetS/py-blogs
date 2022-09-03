@@ -1,18 +1,8 @@
-# from django.shortcuts import render
-# from django.views.generic import View
-
-# # Create your views here.
-
-# def home(request):
-#    return render(request,'login.html')
-
-
-# class IndexView(View):
-#     def get(self, request):
-#         return render(request, 'index.html')
 from django.shortcuts import render,redirect
+from django.views.generic import View
 from .models import *
 from .forms import *
+
 
 # Create your views here.
 def home(request):

@@ -12,11 +12,7 @@ urlpatterns = [
     path('add/',addBlog,name='addblog'),
     # path('like/<str:pk>',likeBlog,name='like'),
 ]
-# urlpatterns = [
-#     path('',IndexViw.as_view(),name='index'),
-    
 
-# ]
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
