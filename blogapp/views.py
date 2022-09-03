@@ -8,3 +8,8 @@ from django.views.generic import View
 class IndexView(View):
     def get(self, request):
         return render(request, 'index.html')
+
+
+class BlogDetailView(View):
+    def get(self, request):
+        return render(request, 'post-details.html')
