@@ -40,8 +40,13 @@ def addBlog(request):
     }
     return render(request,'addblog.html',context)
 
-# def likeBlog(request,pk):
-#     blog=Tag.objects.get(id=pk)
-#     blog.likes+=1
-#     blog.save()
-#     return redirect('/')
+
+class IndexView(View):
+    def get(self, request):
+        return render(request, 'index.html')
+
+
+class BlogDetailView(View):
+    def get(self, request):
+        return render(request, 'post-details.html')
+
