@@ -20,5 +20,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogapp.urls')),
-    path("accounts/", include("allauth.urls")) #most important
+    path("accounts/", include("allauth.urls")), #most important
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
