@@ -6,11 +6,6 @@ blogapp/migrations/__pycache__/__init__.cpython-310.pyc
 
 
 blog/__pycache__
-blogapp/__pycache__/__init__.cpython-310.pyc
-blogapp/__pycache__/admin.cpython-310.pyc
-blogapp/__pycache__/apps.cpython-310.pyc
-blogapp/__pycache__/models.cpython-310.pyc
-blogapp/__pycache__/urls.cpython-310.pyc
-blogapp/__pycache__/views.cpython-310.pyc
+blogapp/__pycache__/
 
 
