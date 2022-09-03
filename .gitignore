@@ -2,8 +2,8 @@
 db.sqlite3
 
 
-
 blogapp/__pycache__/
 
 blogapp/migrations/__pycache__/
 
+blog/__pycache__
