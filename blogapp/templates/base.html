@@ -178,28 +178,28 @@
                                                         <li class="vertical-nav-item active">
                                                             <a class="hover-flip-item-wrapper" href="#tab1">
                                                                 <span class="hover-flip-item">
-                                    <span data-text="Accessibility">Accessibility</span>
+                                            <span data-text="Accessibility">Accessibility</span>
                                                                 </span>
                                                             </a>
                                                         </li>
                                                         <li class="vertical-nav-item">
                                                             <a class="hover-flip-item-wrapper" href="#tab2">
                                                                 <span class="hover-flip-item">
-                                    <span data-text="Android Dev">Android Dev</span>
+                                            <span data-text="Android Dev">Android Dev</span>
                                                                 </span>
                                                             </a>
                                                         </li>
                                                         <li class="vertical-nav-item">
                                                             <a class="hover-flip-item-wrapper" href="#tab3">
                                                                 <span class="hover-flip-item">
-                                    <span data-text="Blockchain">Blockchain</span>
+                                            <span data-text="Blockchain">Blockchain</span>
                                                                 </span>
                                                             </a>
                                                         </li>
                                                         <li class="vertical-nav-item">
                                                             <a class="hover-flip-item-wrapper" href="#tab4">
                                                                 <span class="hover-flip-item">
-                                    <span data-text="Gadgets">Gadgets</span>
+                                            <span data-text="Gadgets">Gadgets</span>
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -729,7 +729,11 @@
                                   <li><a class="dropdown-item" href="#">Dashboard</a></li>
                                   <li><a class="dropdown-item" href="#">Profile</a></li>
                                   <li><a class="dropdown-item" href="{% url 'add-blog' %}">Add Blog</a></li>
-                                  <li><a class="dropdown-item" href="#">Login</a></li>
+                                  {% if user.is_authenticated %}
+                                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                  {% else %}
+                                  <li><a class="dropdown-item" href="accounts/google/login/?process=login">Login</a></li>
+                                  {% endif %}
                                 </ul>
                               </div>
 

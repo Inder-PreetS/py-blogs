@@ -9,6 +9,7 @@ urlpatterns = [
     path('', IndexView.as_view(),name='index'),
     path('add-blog/',AddBlog.as_view(),name='add-blog'),
     path('blog-detail/',BlogDetailView.as_view(),name='blog-detail'),
+    path('logout/',LogoutView,name='logout'),
     # path('like/<str:pk>',likeBlog,name='like'),
     
 ]

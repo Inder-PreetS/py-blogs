@@ -1,6 +1,4 @@
-from re import L
-from typing import Generic
-from urllib import request
+from django.contrib.auth import logout
 from django.shortcuts import render,redirect
 from django.views.generic import View,CreateView
 from blogapp.task import *
@@ -25,13 +23,6 @@ class AddBlogView(View):
     def get(self, request):
         form = blogForm()
         return render(request, 'add-blog.html', {'form': form})
-# def AddBlog(request):
-#     form=blogForm()
-#     if request.method=='POST':
-#         print(request.POST, "======================", request.user)
-#         post_values = request.POST.copy()
-#         post_values['user.id']=request.user.id
-#         print(post_values, "000000000000000000000000000000000000000000000000")
 
 #         form=blogForm(request.POST,request.FILES)
 #         if form.is_valid():
@@ -64,4 +55,8 @@ class AddBlog(CreateView):
     
     
 
+# logout 
+def LogoutView(request):
+    logout(request)
+    return redirect('/')
 
