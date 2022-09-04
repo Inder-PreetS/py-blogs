@@ -75,11 +75,6 @@ class Dashboard(ListView):
         return render(request, 'dashboard.html', {'data': data})
 
 
-# class UpdateBlogView(UpdateView):
-#     def get(self, request):
-#         return render(request, 'edit-blog.html')
-
-
 def DeleteBlogView(request, id):
     obj = Blog.objects.get(id = id)
     print(obj)
@@ -93,8 +88,9 @@ def DeleteBlogView(request, id):
 
 class ListBlogView(ListView):
     def get(self, request):
-        data = Blog.objects.all()
-        return render(request, 'post-list.html', {'data': data})
+        blogsData = Blog.objects.all()
+        return render(request, 'post-list.html', {'blogsData': blogsData})
+
 
 class LoginView(View):
     def get(self, request):
