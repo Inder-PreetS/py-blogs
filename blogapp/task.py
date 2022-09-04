@@ -2,7 +2,7 @@ import requests
 from geopy.geocoders import Nominatim
 import geocoder
 from blogapp.models import Blog
-from bs4 import BeautifulSoup
+
 
 # calling the Nominatim tool
 def get_ip():

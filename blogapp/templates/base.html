@@ -91,7 +91,7 @@
                                 {% if user.is_authenticated %}
                                 <button class="btn btn-secondary dropdown-toggle user_dv" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                   <!-- Dropdown button -->
-                                  <a href="#"><img src="{% static 'images/others/author.png' %}" alt="Author Images"></a>
+                                  <a href="#"><p class="user_dt">{{request.user|make_list|first|capfirst}}</p></a>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                   

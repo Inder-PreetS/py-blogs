@@ -16,33 +16,33 @@
                                     <div class="post-cat-list">
                                         <a class="hover-flip-item-wrapper" href="#">
                                             <span class="hover-flip-item">
-                                                <span data-text="LIFESTYLE">LIFESTYLE</span>
+                                                <span data-text="{{blog.category}}">{{blog.category}}</span>
                                             </span>
                                         </a>
                                     </div>
                                 </div>
-                                <h4 class="title"><a href="post-details.html">Security isn’t just a technology problem it’s about design, too problem it’s about design, too. </a></h4>
+                                <h4 class="title"><a href="post-details.html">{{blog.title}} </a></h4>
                                 <div class="post-meta-wrapper">
                                     <div class="post-meta">
                                         <div class="content">
                                             <h6 class="post-author-name">
-                                                <a class="hover-flip-item-wrapper" href="author.html">
+                                                <a class="hover-flip-item-wrapper">
                                                     <span class="hover-flip-item">
-                                                        <span data-text="Rahabi Khan">Rahabi Khan</span>
+                                                        <span data-text="{{blog.user}}">{{blog.user}}</span>
                                                     </span>
                                                 </a>
                                             </h6>
                                             <ul class="post-meta-list">
-                                                <li>Feb 17, 2019</li>
-                                                <li>3 min read</li>
+                                                <li>{{blog.created_at}}</li>
+                                                <!-- <li>3 min read</li> -->
                                             </ul>
                                         </div>
                                     </div>
                                     <ul class="social-share-transparent justify-content-end">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-link"></i></a></li>
+                                        <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="https://www.facebook.com/"><i class="fas fa-link"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -56,70 +56,27 @@
 
                             <!-- Start Single Widget  -->
                             <div class="axil-single-widget widget widget_categories mb--30">
+                                {% for data in blogsData %}
                                 <ul>
                                     <li class="cat-item">
-                                        <a href="#" class="inner">
+                                        <a class="inner">
                                             <div class="thumbnail">
-                                                <img src="{% static 'images/post-images/category-image-01.jpg' %}" alt="">
+                                                <h2>{{data.category|make_list|first}}</h2>
                                             </div>
                                             <div class="content">
-                                                <h5 class="title">Tech</h5>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="cat-item">
-                                        <a href="#" class="inner">
-                                            <div class="thumbnail">
-                                                <img src="{% static 'images/post-images/category-image-02.jpg' %}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h5 class="title">Style</h5>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="cat-item">
-                                        <a href="#" class="inner">
-                                            <div class="thumbnail">
-                                                <img src="{% static 'images/post-images/category-image-03.jpg' %}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h5 class="title">Travel</h5>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="cat-item">
-                                        <a href="#" class="inner">
-                                            <div class="thumbnail">
-                                                <img src="{% static 'images/post-images/category-image-04.jpg' %}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h5 class="title">Food</h5>
+                                                <h5 class="title">{{data.category}}</h5>
                                             </div>
                                         </a>
                                     </li>
                                 </ul>
+                                {% endfor %}
                             </div>
-                            <!-- End Single Widget  -->
 
-                            <!-- Start Single Widget  -->
-                            <div class="axil-single-widget widget widget_search mb--30">
-                                <h5 class="widget-title">Search</h5>
-                                <form action="#">
-                                    <div class="axil-search form-group">
-                                        <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- End Single Widget  -->
 
-                            <!-- Start Single Widget  -->
                             <div class="axil-single-widget widget widget_postlist mb--30">
-                                <h5 class="widget-title">Popular on Blogar</h5>
-                                <!-- Start Post List  -->
+                                <h5 class="widget-title">Most Liked Blogs</h5>
                                 <div class="post-medium-block">
 
-                                    <!-- Start Single Post  -->
                                     <div class="content-block post-medium mb--20">
                                         <div class="post-thumbnail">
                                             <a href="post-details.html">
@@ -137,9 +94,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End Single Post  -->
 
-                                    <!-- Start Single Post  -->
                                     <div class="content-block post-medium mb--20">
                                         <div class="post-thumbnail">
                                             <a href="post-details.html">

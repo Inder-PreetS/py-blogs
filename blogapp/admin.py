@@ -1,7 +1,6 @@
 from django.contrib import admin
-from blogapp.models import Blog, Tag
+from blogapp.models import Blog, Likes, Tag
 # Register your models here.
 
 
-admin.site.register(Blog)
-admin.site.register(Tag)
+admin.site.register((Blog, Tag, Likes))
