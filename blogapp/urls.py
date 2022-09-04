@@ -16,6 +16,7 @@ urlpatterns = [
     path('edit-blog/<int:id>/',views.UpdateBlogView.as_view(),name='edit-blog'),
     path('delete-blog/<int:id>/',views.DeleteBlogView,name='delete-blog'),
     path('login/',views.LoginView.as_view(),name='login'),
+    path('search/', views.SearchView.as_view(),name = 'search')
     # path('like/<str:pk>',likeBlog,name='like'),
     
 ]
