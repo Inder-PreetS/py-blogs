@@ -14,7 +14,7 @@
                    
 
                     <div class="social-share-block">
-                        <form action="{% url '' %}" method="post">
+                        <form action="{url 'like' }" method="post">
                             {% csrf_token %}
                             <div class="post-like">
                                 <a href="#"><i class="fal fa-thumbs-up"></i><span>2.2k Like</span></a>
@@ -30,6 +30,17 @@
     </div>
 </div>
 
+{% block scripts %}
+
+<!-- var count = 0;
+
+$(".fa-thumbs-up").click(function() {
+    count++;
+    $("#counter").html("My current count is: "+count);
+    console.log(count)
+}) -->
+
+{% endblock %}
 
 
 {% endblock %}
