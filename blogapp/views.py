@@ -2,10 +2,11 @@ from re import L
 from typing import Generic
 from urllib import request
 from django.shortcuts import render,redirect
-from django.views.generic import View,CreateView
+from django.views.generic import View,CreateView,UpdateView,DeleteView,ListView,DetailView
 from blogapp.task import *
 from .models import *
 from .forms import *
+from blogapp.text_file_to_speech import *
 
 
 # Create your views here.
@@ -46,6 +47,10 @@ class AddBlog(CreateView):
     form_class=blogForm
     template_name='add-blog.html'
     # success_url='/'
+
+    # def getContent():
+    #     soup = BeautifulSoup(html)
+    #     print (soup.text)
     
 
     def form_valid(self,form):
@@ -53,11 +58,31 @@ class AddBlog(CreateView):
             form.instance.user=self.request.user
             form.instance.audio_status='Processing'
             form.instance.state = get_ip()
+            html = form.instance.content
+            soup = BeautifulSoup(html)
+            form.instance.audio_url = text_to_audio("Title is "+form.instance.title+"."+ "Description is"+soup.text, form.instance.title)
+            # for tag in form.instance.tag_name:
+            #     Tag.objects.create(blog=form.instance, tag_name=tag)
+
             form.save()
             return render(self.request,'index.html',{'form':form})
         else:
-            return redirect('login')
-            # return render(self.request,'login.html')
+            return render(self.request,'login.html')
+
+# class ModelUpdateView(UpdateView):
+#     model = Blog
+#     template_name = "update.html"
+
+#     def put(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         print(self.object,'======================')
+#         form = self.get_form()
+#         if form.is_valid():
+#             return self.form_valid(form)
+#         else:
+#             return self.form_invalid(form)
+        # return self.post(request, *args, **kwargs)
+
 
     
 

@@ -2,6 +2,7 @@ import requests
 from geopy.geocoders import Nominatim
 import geocoder
 from blogapp.models import Blog
+from bs4 import BeautifulSoup
 
 # calling the Nominatim tool
 def get_ip():
@@ -17,4 +18,5 @@ def likeByUser(request):
         blog_obj = Blog.objects.filter(id=blog_id)
         blog_obj.update(like=blog_obj.values()[0]['like']+1) 
         return blog_obj
+
 
