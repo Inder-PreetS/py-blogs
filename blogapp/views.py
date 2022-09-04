@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 from django.urls import reverse_lazy
 from blogapp.text_file_to_speech import *
+from django.urls import reverse
 
 
 class IndexView(View):
@@ -35,27 +36,21 @@ class AddBlogView(CreateView):
             html = form.instance.content
             soup = BeautifulSoup(html)
             form.instance.audio_url = text_to_audio("Title is "+form.instance.title+"."+ "Description is"+soup.text, form.instance.title)
-            # for tag in form.instance.tag_name:
-            #     Tag.objects.create(blog=form.instance, tag_name=tag)
-
+            given_tag = self.request.POST['tag']
+            lis_tag = given_tag.split(",")
             form.save()
+            for tag in lis_tag:
+                Tag.objects.create(blog=form.instance, tag_name=tag)
+
             return render(self.request,'index.html',{'form':form})
         else:
             return render(self.request,'login.html')
 
 class UpdateBlogView(UpdateView):
     model = Blog
-    template_name = "update.html"
-
-    def put(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        print(self.object,'======================')
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-        # return self.post(request, *args, **kwargs)
+    template_name = "update-blog.html"
+    fields=['title', 'content', ]
+    success_url=reverse_lazy('dashboard',)
 
 
 def LogoutView(request):
@@ -65,8 +60,9 @@ def LogoutView(request):
 
 class DashboardBlogView(ListView):
     def get(self, request):
-        data = Blog.objects.all()
-        return render(request, 'post-list.html', {'data': data})
+        if self.request.user.is_authenticated:
+            data = Blog.objects.filter(user = self.request.user)
+            return render(request, 'dashboard.html', {'data': data})
 
 
 class Dashboard(ListView):
