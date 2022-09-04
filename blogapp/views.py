@@ -6,6 +6,8 @@ from .models import *
 from .forms import *
 from django.urls import reverse_lazy
 from blogapp.text_file_to_speech import *
+from django.contrib import messages
+from django.db.models import Q 
 
 
 class IndexView(View):
@@ -90,3 +92,33 @@ class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
 
+
+class SearchView(ListView):
+    model = Blog
+    template_name = 'search-result.html'
+    context_object_name = 'blogs'
+
+    def get_queryset(self):
+        search_result = []
+        print( self.request.GET.get('q'),"===================================")
+        if self.request.method == 'GET':
+            print("----------------------------")
+            query = self.request.GET.get('q')
+            if query:
+                print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+                blogs_q = Blog.objects.filter(Q(title__contains=query) )
+                # | Q(category__contains=query)
+                blogs = list(blogs_q)
+                tags = Tag.objects.filter(tag_name__contains=query)
+                a = [i.blog for i in tags]
+                search_result = a + blogs
+                print(tags,"--------------------------")
+                print(search_result,"@@--------------------------")
+
+                
+                return render(self.request, 'search-result.html', {'blogs':search_result})
+
+            else:
+                messages.success(self.request, 'not found')
+
+    
