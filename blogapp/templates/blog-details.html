@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="post-single-wrapper axil-section-gap bg-color-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="axil-post-details">
+                    <h2>{{blog.title}}</h2>
+
+                    <p>{{blog.content|safe}}</p>
+                   
+
+                    <div class="social-share-block">
+                        <form action="{url 'like' }" method="post">
+                            {% csrf_token %}
+                            <div class="post-like">
+                                <a href="#"><i class="fal fa-thumbs-up"></i><span>2.2k Like</span></a>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+
+<!-- var count = 0;
+
+$(".fa-thumbs-up").click(function() {
+    count++;
+    $("#counter").html("My current count is: "+count);
+    console.log(count)
+}) -->
+
+{% endblock %}
+
+
+{% endblock %}

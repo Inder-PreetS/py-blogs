@@ -15,13 +15,15 @@ class IndexView(View):
         return render(request, 'index.html')
 
 
-class BlogDetailView(View):
+class BlogDetailView(DetailView):
     model = Blog
+    template_name='blog-details.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["blog"] = Blog.objects.get(id=self.kwargs.get())
+        context['blog'] = Blog.objects.get(slug=self.kwargs['slug'])
         return context
+
     
 
 class AddBlogView(CreateView):
@@ -51,13 +53,11 @@ class UpdateBlogView(UpdateView):
 
     def put(self, request, *args, **kwargs):
         self.object = self.get_object()
-        print(self.object,'======================')
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-        # return self.post(request, *args, **kwargs)
 
 
 def LogoutView(request):
@@ -85,13 +85,20 @@ def DeleteBlogView(request, id):
 class ListBlogView(ListView):
     def get(self, request):
         blogsData = Blog.objects.all()
-        return render(request, 'post-list.html', {'blogsData': blogsData})
+        return render(request, 'blog-list.html', {'blogsData': blogsData})
 
 
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
 
+
+
+class LikeView(CreateView):
+    model = Likes
+
+    def post(self, request, *args, **kwargs):
+        blog_id = request.POST.get('')
 
 class SearchView(ListView):
     model = Blog
@@ -121,4 +128,3 @@ class SearchView(ListView):
             else:
                 messages.success(self.request, 'not found')
 
-    
