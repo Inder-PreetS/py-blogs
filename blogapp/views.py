@@ -1,12 +1,9 @@
 from django.contrib.auth import logout
 from django.shortcuts import render,redirect
-from django.views.generic import View,CreateView
+from django.views.generic import View, CreateView, ListView, UpdateView, DeleteView
 from blogapp.task import *
 from .models import *
 from .forms import *
-
-
-# Create your views here.
 
 
 class IndexView(View):
@@ -19,25 +16,10 @@ class BlogDetailView(View):
         return render(request, 'post-details.html')
 
 
-class AddBlogView(View):
-    def get(self, request):
-        form = blogForm()
-        return render(request, 'add-blog.html', {'form': form})
-
-#         form=blogForm(request.POST,request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/')
-#     context={
-#         'form':form,
-#     }
-#     return render(request,'addblog.html',context)
-class AddBlog(CreateView):
+class AddBlogView(CreateView):
     model=Blog
     form_class=blogForm
-    template_name='add-blog.html'
-    # success_url='/'
-    
+    template_name='add-blog.html'    
 
     def form_valid(self,form):
         if self.request.user.is_authenticated:
@@ -47,16 +29,31 @@ class AddBlog(CreateView):
             form.save()
             return render(self.request,'index.html',{'form':form})
         else:
-            return redirect('login')
-            # return render(self.request,'login.html')
-
+            return redirect('accounts/google/login/?process=login')    
     
-
-    
-    
-
-# logout 
+ 
 def LogoutView(request):
     logout(request)
     return redirect('/')
 
+
+class ListBlogView(ListView):
+    def get(self, request):
+        data = Blog.objects.all()
+        return render(request, 'dashboard.html', {'data': data})
+
+
+class UpdateBlogView(UpdateView):
+    def get(self, request):
+        return render(request, 'edit-blog.html')
+
+
+def DeleteBlogView(request, id):
+    context ={}
+    obj = Blog.objects.get(id = id)
+
+    if request.method =="POST":
+        obj.delete()
+        return redirect("/")
+ 
+    return render(request, "delete_view.html", context)

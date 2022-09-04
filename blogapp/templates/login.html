@@ -2,5 +2,6 @@
 {% load socialaccount %}
 <div class="container">
       <h1>My Google Login Project</h1>
-      <a href="{% provider_login_url 'google'%}?next=/">Login with Google</a>
+      <a href="{% provider_login_url 'google' %}?next=/login">Login with Google</a>
 </div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>

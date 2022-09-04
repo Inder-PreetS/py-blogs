@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Dashboard</h1>
+            <p>Here you can see all your blogs.</p>
+            <a href="{% url 'add-blog' %}" class="btn btn-primary">New Post</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for blog in data %}
+                    <tr>
+                        <td>{{ blog.title }}</td>
+                        <td>{{ blog.user }}</td>
+                        <td>
+                            <!-- <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a> -->\
+                            <button type="button" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#{{blog.id}}">Delete> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+  <!-- Modal -->
+<div class="modal fade" id="{{ blog.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">No</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
