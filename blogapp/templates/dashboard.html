@@ -21,7 +21,7 @@
                         <td>{{ blog.title }}</td>
                         <td>{{ blog.user }}</td>
                         <td>
-                            <!-- <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a> -->\
+                            <!-- <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a> -->
                             <button type="button" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#{{blog.id}}">Delete> -->
                         </td>
                     </tr>
@@ -44,7 +44,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">No</a>
+          {% comment %} <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">No</a> {% endcomment %}
         </div>
       </div>
     </div>

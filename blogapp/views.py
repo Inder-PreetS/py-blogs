@@ -4,6 +4,7 @@ from django.views.generic import View,CreateView,UpdateView,DeleteView,ListView,
 from blogapp.task import *
 from .models import *
 from .forms import *
+from django.urls import reverse_lazy
 from blogapp.text_file_to_speech import *
 
 
@@ -13,9 +14,13 @@ class IndexView(View):
 
 
 class BlogDetailView(View):
-    def get(self, request):
-        return render(request, 'post-details.html')
+    model = Blog
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["blog"] = Blog.objects.get(id=self.kwargs.get())
+        return context
+    
 
 class AddBlogView(CreateView):
     model=Blog
@@ -38,21 +43,21 @@ class AddBlogView(CreateView):
         else:
             return render(self.request,'login.html')
 
-# class ModelUpdateView(UpdateView):
-#     model = Blog
-#     template_name = "update.html"
+class UpdateBlogView(UpdateView):
+    model = Blog
+    template_name = "update.html"
 
-#     def put(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         print(self.object,'======================')
-#         form = self.get_form()
-#         if form.is_valid():
-#             return self.form_valid(form)
-#         else:
-#             return self.form_invalid(form)
+    def put(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print(self.object,'======================')
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
         # return self.post(request, *args, **kwargs)
 
-    
+
  
 def LogoutView(request):
     logout(request)
@@ -62,20 +67,31 @@ def LogoutView(request):
 class ListBlogView(ListView):
     def get(self, request):
         data = Blog.objects.all()
+        return render(request, 'post-list.html', {'data': data})
+
+
+class Dashboard(ListView):
+    def get(self, request):
+        data = Blog.objects.all()
         return render(request, 'dashboard.html', {'data': data})
 
 
-class UpdateBlogView(UpdateView):
-    def get(self, request):
-        return render(request, 'edit-blog.html')
+# class UpdateBlogView(UpdateView):
+#     def get(self, request):
+#         return render(request, 'edit-blog.html')
 
 
-def DeleteBlogView(request, id):
-    context ={}
-    obj = Blog.objects.get(id = id)
+# def DeleteBlogView(request, id):
+#     context ={}
+#     obj = Blog.objects.get(id = id)
 
-    if request.method =="POST":
-        obj.delete()
-        return redirect("/")
+#     if request.method =="POST":
+#         obj.delete()
+#         return redirect("/")
  
-    return render(request, "delete_view.html", context)
+#     return render(request, "delete_view.html", context)
+
+class DeleteBlogView(DeleteView):
+    model = Blog
+    success_url = reverse_lazy('dashboard')
+
