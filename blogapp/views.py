@@ -38,20 +38,6 @@ class AddBlogView(CreateView):
         else:
             return render(self.request,'login.html')
 
-# class ModelUpdateView(UpdateView):
-#     model = Blog
-#     template_name = "update.html"
-
-#     def put(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         print(self.object,'======================')
-#         form = self.get_form()
-#         if form.is_valid():
-#             return self.form_valid(form)
-#         else:
-#             return self.form_invalid(form)
-        # return self.post(request, *args, **kwargs)
-
     
  
 def LogoutView(request):
@@ -59,7 +45,7 @@ def LogoutView(request):
     return redirect('/')
 
 
-class ListBlogView(ListView):
+class DashboardBlogView(ListView):
     def get(self, request):
         data = Blog.objects.all()
         return render(request, 'dashboard.html', {'data': data})
@@ -71,11 +57,21 @@ class UpdateBlogView(UpdateView):
 
 
 def DeleteBlogView(request, id):
-    context ={}
     obj = Blog.objects.get(id = id)
+    print(obj)
 
     if request.method =="POST":
-        obj.delete()
+        a = obj.delete()
+        print(a)
         return redirect("/")
+    return redirect("/")
  
-    return render(request, "delete_view.html", context)
+
+class ListBlogView(ListView):
+    def get(self, request):
+        data = Blog.objects.all()
+        return render(request, 'post-list.html', {'data': data})
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
