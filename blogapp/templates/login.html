@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
-{% load socialaccount %}
+{% load static %}
+<!-- {% load socialaccount %} -->
+{% block content %}
 <div class="container">
-      <h1>My Google Login Project</h1>
-      <a href="{% provider_login_url 'google' %}?next=/login">Login with Google</a>
+   <div class="content">
+      <div class="google_dv mt-5">
+         <h3>Sign-up with Google</h3>
+         <a href="{% provider_login_url 'google' %}?next=/login"><img src="{% static 'images/google.png' %}" alt="google" /></a>
+
+      </div>
+   </div>
 </div>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <h1>My Google Login Project</h1>
+      <a href="{% provider_login_url 'google' %}?next=/login">Login with Google</a> -->
+{% endblock %}

@@ -58,13 +58,12 @@ class UpdateBlogView(UpdateView):
         # return self.post(request, *args, **kwargs)
 
 
- 
 def LogoutView(request):
     logout(request)
     return redirect('/')
 
 
-class ListBlogView(ListView):
+class DashboardBlogView(ListView):
     def get(self, request):
         data = Blog.objects.all()
         return render(request, 'post-list.html', {'data': data})
@@ -81,17 +80,23 @@ class Dashboard(ListView):
 #         return render(request, 'edit-blog.html')
 
 
-# def DeleteBlogView(request, id):
-#     context ={}
-#     obj = Blog.objects.get(id = id)
+def DeleteBlogView(request, id):
+    obj = Blog.objects.get(id = id)
+    print(obj)
 
-#     if request.method =="POST":
-#         obj.delete()
-#         return redirect("/")
+    if request.method =="POST":
+        a = obj.delete()
+        print(a)
+        return redirect("/")
+    return redirect("/")
  
-#     return render(request, "delete_view.html", context)
 
-class DeleteBlogView(DeleteView):
-    model = Blog
-    success_url = reverse_lazy('dashboard')
+class ListBlogView(ListView):
+    def get(self, request):
+        data = Blog.objects.all()
+        return render(request, 'post-list.html', {'data': data})
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
 

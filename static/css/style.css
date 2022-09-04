@@ -595,6 +595,27 @@ label {
   font-weight: 500;
 }
 
+button.btn.btn-danger.delete {
+  width: 30px;
+}
+
+button.btn.btn-primary.edit {
+  width: 30px;
+}
+
+button.btn.btn-secondary.view {
+  width: 30px;
+}
+
+button.btn.btn-primary.edit a {
+  color: white;
+}
+
+.google_dv {
+  margin: 0px auto;
+  max-width: fit-content;
+  padding: 50px;
+}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
@@ -9544,6 +9565,7 @@ Search Styles
   margin-bottom: 0;
   text-align: right;
   display: inline-block;
+  margin-right: 40px;
 }
 
 .axil-search.form-group input {
