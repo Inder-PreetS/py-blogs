@@ -11,6 +11,7 @@ urlpatterns = [
     path('blog-detail/',BlogDetailView.as_view(),name='blog-detail'),
     path('logout/',LogoutView,name='logout'),
     path('all-blogs/',ListBlogView.as_view(),name='all-blogs'),
+
     path('dashboard/',views.DashboardBlogView.as_view(),name='dashboard'),
     path('edit-blog/<int:id>/',views.UpdateBlogView.as_view(),name='edit-blog'),
     path('delete-blog/<int:id>/',views.DeleteBlogView,name='delete-blog'),

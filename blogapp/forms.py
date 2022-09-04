@@ -6,7 +6,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class blogForm(ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    content = forms.CharField(widget=CKEditorWidget())
+    content = CKEditorUploadingWidget()
     slug = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     tag = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
 
