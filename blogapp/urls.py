@@ -18,7 +18,7 @@ urlpatterns = [
     path('login/',views.LoginView.as_view(),name='login'),
     path('like/',views.LikeView.as_view(),name='like'),
 
-    path('search/', views.SearchView.as_view(),name = 'search')
+    path('search', views.SearchView.as_view(),name = 'search')
 
     
 ]

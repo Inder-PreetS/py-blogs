@@ -8,11 +8,12 @@ from django.urls import reverse_lazy
 from blogapp.text_file_to_speech import *
 from django.contrib import messages
 from django.db.models import Q 
+from bs4 import BeautifulSoup
 
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'index.html')
+        return render(request, 'blog-list.html')
 
 
 class BlogDetailView(DetailView):
@@ -43,7 +44,7 @@ class AddBlogView(CreateView):
             #     Tag.objects.create(blog=form.instance, tag_name=tag)
 
             form.save()
-            return render(self.request,'index.html',{'form':form})
+            return render(self.request,'blog-list.html',{'form':form})
         else:
             return render(self.request,'login.html')
 
@@ -105,26 +106,40 @@ class SearchView(ListView):
     template_name = 'search-result.html'
     context_object_name = 'blogs'
 
-    def get_queryset(self):
-        search_result = []
-        print( self.request.GET.get('q'),"===================================")
-        if self.request.method == 'GET':
-            print("----------------------------")
-            query = self.request.GET.get('q')
-            if query:
-                print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-                blogs_q = Blog.objects.filter(Q(title__contains=query) )
-                # | Q(category__contains=query)
-                blogs = list(blogs_q)
-                tags = Tag.objects.filter(tag_name__contains=query)
-                a = [i.blog for i in tags]
-                search_result = a + blogs
-                print(tags,"--------------------------")
-                print(search_result,"@@--------------------------")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context['object_list'])
+        query = self.request.GET.get('q')
+
+        if query:
+            context['blogs'] = Blog.objects.filter(title__icontains=query)
+            print(context)            
+            tags = Tag.objects.filter(tag_name__contains=query)
+            context['tags'] = tags
+        return context
+    
+
+    # def get(self):
+    #     search_result = []
+    #     # print( self.request.GET.get('q'),"===================================")
+    #     if self.request.method == 'GET':
+    #         query = self.request.GET.get('q')
+    #         print("----------------------------",query)
+    #         if query:
+    #             print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+    #             blogs = Blog.objects.all()
+    #             print(blogs)
+    #             # | Q(category__contains=query)
+    #             # blogs = list(blogs_q)
+    #             # tags = Tag.objects.filter(tag_name__contains=query)
+    #             # a = [i.blog for i in tags]
+    #             # search_result = a + blogs
+    #             # print(tags,"--------------------------")
+    #             # print(search_result,"@@--------------------------")
 
                 
-                return render(self.request, 'search-result.html', {'blogs':search_result})
+    #             return render(self.request, 'search-result.html', {'blogs':blogs})
 
-            else:
-                messages.success(self.request, 'not found')
+    #         else:
+    #             messages.success(self.request, 'not found')
 

@@ -14566,3 +14566,32 @@ body.active-dark-mode .axil-footer-style-1 .footer-top .inner {
     color: #ffffff;
   }
 }
+
+
+
+
+.user_dv{
+  height: 40px;
+  padding: 0;
+}
+.user_dv > a{
+  background: #3858f6;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* color: #fff !important; */
+}
+
+.user_dv > a p{
+  color: #fff !important;
+}
+
+
+
+
+
+
+
