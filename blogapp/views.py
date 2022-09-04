@@ -66,12 +66,6 @@ def LogoutView(request):
 class DashboardBlogView(ListView):
     def get(self, request):
         data = Blog.objects.all()
-        return render(request, 'post-list.html', {'data': data})
-
-
-class Dashboard(ListView):
-    def get(self, request):
-        data = Blog.objects.all()
         return render(request, 'dashboard.html', {'data': data})
 
 
